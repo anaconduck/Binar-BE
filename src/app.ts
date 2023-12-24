@@ -1,7 +1,7 @@
 import express, { Application } from 'express';
 import CarsHandler from './handlers/cars';
 import fileUploadsCloudinary from "./utils/fileUploadsCloudinary";
-// import UsersHandler from "./handlers/users";
+import UsersHandler from "./handlers/users";
 import AuthHandler from "./handlers/auth";
 import AuthMiddleware from "./middlewares/auth";
 import dotenv from "dotenv";
@@ -9,7 +9,7 @@ import cors from 'cors';
 dotenv.config();
 
 const app: Application = express();
-const PORT = process.env.APP_PORT;;
+const PORT = process.env.APP_PORT;
 
 // Add middleware to get the body from the request
 app.use(express.json());
