@@ -80,7 +80,7 @@ class AuthMiddleware {
         });
 
       // Check user role
-      if (!(user.role === "member" || user.role === "superadmin")) {
+      if (!(user.role === "admin" || user.role === "superadmin")) {
         return res.status(403).send({
           status: "FORBIDDEN",
           message: "Only Admin",

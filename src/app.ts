@@ -1,7 +1,7 @@
 import express, { Application } from 'express';
 import CarsHandler from './handlers/cars';
 import fileUploadsCloudinary from "./utils/fileUploadsCloudinary";
-import UsersHandler from "./handlers/users";
+// import UsersHandler from "./handlers/users";
 import AuthHandler from "./handlers/auth";
 import AuthMiddleware from "./middlewares/auth";
 import dotenv from "dotenv";
