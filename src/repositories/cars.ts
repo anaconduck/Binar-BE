@@ -1,6 +1,8 @@
 import { Car, CarEntity } from "../models/entity/car";
 
 class CarsRepository {
+  constructor() {}
+  
   //Create
   static async createCar(car: Car): Promise<Car> {
     const createdCar = await CarEntity.query().insert({
