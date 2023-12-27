@@ -30,13 +30,6 @@ class UsersServices {
       throw error;
     }
   }
-
-  //Read
-  static async getUsersById(queryId: number): Promise<User[]> {
-    const listUser = await UsersRepository.getUsersById(queryId);
-
-    return listUser;
-  }
 }
 
 export default UsersServices;

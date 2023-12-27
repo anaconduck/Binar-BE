@@ -50,32 +50,6 @@ class UsersHandler {
 
     res.status(201).send(response);
   }
-
-  //Read
-  async getUsersById(req: Request, res: Response) {
-    const queryId: number = parseInt(req.params.id);
-    console.log("ini queryId :", queryId);
-
-    const usersList: User[] = await UsersServices.getUsersById(queryId);
-    console.log("ini userslist :", usersList);
-
-    if (usersList.length === 0) {
-      const Response: DefaultResponse = {
-        status: "ERROR",
-        message: "User not found",
-        data: null,
-      };
-      return res.status(404).send(Response);
-    }
-    const response: DefaultResponse = {
-      status: "OK",
-      message: "Success retrieving data",
-      data: {
-        users: usersList,
-      },
-    };
-    res.status(200).send(response);
-  }
 }
 
 export default UsersHandler;

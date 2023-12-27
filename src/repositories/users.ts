@@ -15,11 +15,6 @@ class UsersRepository {
   }
 
   //Read
-  static async getUsersById(queryId: number): Promise<User[]> {
-    const listUser = await UserEntity.query().where("id", queryId);
-    return listUser;
-  }
-
   static async getUserByEmail(email: string): Promise<User | null> {
     const user = await UserEntity.query()
       .where(raw('lower("email")'), "=", email)
