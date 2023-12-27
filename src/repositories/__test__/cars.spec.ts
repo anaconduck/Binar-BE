@@ -7,9 +7,8 @@ import CarsRepository from "../cars";
       const carToCreate: Car = {
         id: 1,
         car_name: "coba test",
-        car_categories: 'tes',
+        car_rentperday: 20000,
         car_size: "Large",
-        status_rental: 'test',
         car_img: "createcar.jpg",
       };
       const createdCar = await CarsRepository.createCar(carToCreate);
