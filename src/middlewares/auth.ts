@@ -4,6 +4,7 @@ import UsersRepository from "../repositories/users";
 import { TokenPayload } from "../models/entity/auth";
 
 class AuthMiddleware {
+  //Permission to login 
   static async authenticate(req: Request, res: Response, next: NextFunction) {
     // Decode token & validate token
     // Get token from authorization header
@@ -45,6 +46,7 @@ class AuthMiddleware {
     }
   }
 
+  //Only admin 
   static async authenticateAdmin(
     req: Request,
     res: Response,
@@ -99,6 +101,8 @@ class AuthMiddleware {
       });
     }
   }
+
+  //Only Superadmin
   static async authenticateSuperAdmin(
     req: Request,
     res: Response,

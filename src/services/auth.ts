@@ -9,6 +9,85 @@ import jwt from "jsonwebtoken";
 const SALT_ROUND = 10;
 
 class AuthService {
+  
+  //Register Admin
+  static async registerAdmin(
+    req: RegisterRequest
+  ): Promise<User | ErrorResponse> {
+    try {
+      // Check if email is exist
+      const user = await UsersRepository.getUserByEmail(req.email);
+
+      if (user) {
+        throw new Error("user with the same email already exist");
+      }
+      if (req.role === "superadmin") {
+        throw new Error("can't create superadmin");
+      }
+      // Encrypt password
+      const encryptedPassword = bcrypt.hashSync(req.password, SALT_ROUND);
+
+      // Store / create user to database
+      const userToCreate: User = {
+        email: req.email,
+        name: req.name,
+        password: encryptedPassword,
+        role: req.role,
+      };
+
+      const createdUser = await UsersRepository.createUser(userToCreate);
+
+      return createdUser;
+    } catch (error: any) {
+      // If something is wrong, return the error
+      const errorResponse: ErrorResponse = {
+        httpCode: 400,
+        message: error.message,
+      };
+
+      return errorResponse;
+    }
+  }
+
+  //Register All Role
+  static async register(req: RegisterRequest): Promise<User | ErrorResponse> {
+    try {
+      // Check if email is exist
+      const user = await UsersRepository.getUserByEmail(req.email);
+
+      if (user) {
+        throw new Error("user with the same email already exist");
+      }
+      if (req.role !== "member") {
+        throw new Error("only create member");
+      }
+
+      // Encrypt password
+      const encryptedPassword = bcrypt.hashSync(req.password, SALT_ROUND);
+
+      // Store / create user to database
+      const userToCreate: User = {
+        email: req.email,
+        name: req.name,
+        password: encryptedPassword,
+        role: req.role,
+      };
+
+      const createdUser = await UsersRepository.createUser(userToCreate);
+
+      return createdUser;
+    } catch (error: any) {
+      // If something is wrong, return the error
+      const errorResponse: ErrorResponse = {
+        httpCode: 400,
+        message: error.message,
+      };
+
+      return errorResponse;
+    }
+  }
+
+  //Login
   static async login(req: LoginRequest): Promise<Auth | ErrorResponse> {
     try {
       // Validate fields existence
@@ -51,80 +130,6 @@ class AuthService {
       };
 
       return token;
-    } catch (error: any) {
-      // If something is wrong, return the error
-      const errorResponse: ErrorResponse = {
-        httpCode: 400,
-        message: error.message,
-      };
-
-      return errorResponse;
-    }
-  }
-
-  static async registerAdmin(
-    req: RegisterRequest
-  ): Promise<User | ErrorResponse> {
-    try {
-      // Check if email is exist
-      const user = await UsersRepository.getUserByEmail(req.email);
-
-      if (user) {
-        throw new Error("user with the same email already exist");
-      }
-      if (req.role === "superadmin") {
-        throw new Error("can't create superadmin");
-      }
-      // Encrypt password
-      const encryptedPassword = bcrypt.hashSync(req.password, SALT_ROUND);
-
-      // Store / create user to database
-      const userToCreate: User = {
-        email: req.email,
-        name: req.name,
-        password: encryptedPassword,
-        role: req.role,
-      };
-
-      const createdUser = await UsersRepository.createUser(userToCreate);
-
-      return createdUser;
-    } catch (error: any) {
-      // If something is wrong, return the error
-      const errorResponse: ErrorResponse = {
-        httpCode: 400,
-        message: error.message,
-      };
-
-      return errorResponse;
-    }
-  }
-  static async register(req: RegisterRequest): Promise<User | ErrorResponse> {
-    try {
-      // Check if email is exist
-      const user = await UsersRepository.getUserByEmail(req.email);
-
-      if (user) {
-        throw new Error("user with the same email already exist");
-      }
-      if (req.role !== "member") {
-        throw new Error("only create member");
-      }
-
-      // Encrypt password
-      const encryptedPassword = bcrypt.hashSync(req.password, SALT_ROUND);
-
-      // Store / create user to database
-      const userToCreate: User = {
-        email: req.email,
-        name: req.name,
-        password: encryptedPassword,
-        role: req.role,
-      };
-
-      const createdUser = await UsersRepository.createUser(userToCreate);
-
-      return createdUser;
     } catch (error: any) {
       // If something is wrong, return the error
       const errorResponse: ErrorResponse = {
