@@ -61,7 +61,7 @@ app.post(
   AuthMiddleware.authenticateSuperAdmin,
   authHandler.registerAdmin
 );
-//member
+//members
 app.post("/api/auth/register", authHandler.register);
 app.post("/api/auth/login", authHandler.login);
 app.get(
