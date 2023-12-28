@@ -1,4 +1,4 @@
-import cloudinary from "../../config/cloudinary";
+import cloudinary from "../config/cloudinary";
 import { UserRequest } from "../models/dto/user";
 import { User } from "../models/entity/user";
 import UsersRepository from "../repositories/users";

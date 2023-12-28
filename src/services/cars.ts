@@ -1,7 +1,7 @@
 import { CarRequest, CarResponse } from "../models/dto/car";
 import { Car } from "../models/entity/car";
 import CarsRepository from "../repositories/cars";
-import cloudinary from "../../config/cloudinary";
+import cloudinary from "../config/cloudinary";
 
 class CarServices {
   //Create

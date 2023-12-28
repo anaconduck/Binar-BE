@@ -1,5 +1,5 @@
 import { Model, ModelObject } from "objection";
-import knexInstance from "../../../config/postgreesql";
+import knexInstance from "../../config/postgreesql";
 import { User, UserEntity } from "./user";
 
 export class CarEntity extends Model {
